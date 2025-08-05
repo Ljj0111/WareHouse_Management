@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">添加新设备</h2>
+        <form method="post" id="addDeviceForm" class="mt-3">
+            <div class="mb-3">
+                <label for="name" class="form-label">设备名称</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="quantity" class="form-label">初始库存数量</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" required min="0">
+            </div>
+            <button type="submit" class="btn btn-primary">添加</button>
+        </div>
+    </div>
+    <div id="addMessage" class="mt-3"></div>
+    <script>
+        $('#addDeviceForm').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: '/api/add_device',
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('#addMessage').text(response.message).removeClass('text-danger').addClass('text-success');
+                },
+                error: function(xhr) {
+                    $('#addMessage').text(xhr.responseJSON.message).removeClass('text-success').addClass('text-danger');
+                }
+            });
+        });
+    </script>

@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title">操作历史记录</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>设备名称</th>
+          <th>操作类型</th>
+          <th>数量</th>
+          <th>操作人</th>
+          <th>时间</th>
+          <th>来源或去处</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for record in records %}
+        <tr>
+          <td>{{ record[0] }}</td>
+          <td>{{ record[1] }}</td>
+          <td>{{ '入库' if record[2] == 'in' else '出库' }}</td>
+          <td>{{ record[3] }}</td>
+          <td>{{ record[4] }}</td>
+          <td>{{ record[5] }}</td>
+          <td>{{ record[6] or '无' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
